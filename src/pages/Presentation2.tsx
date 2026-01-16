@@ -78,25 +78,53 @@ export default function Presentation2() {
       x: 0.5, y: 0.4, w: 9, h: 0.5, 
       fontSize: 28, color: '1A2332', bold: true, align: 'center' 
     });
+    
+    // Card 1
+    slide2.addShape(pptx.ShapeType.rect, { 
+      x: 0.5, y: 1.2, w: 4.5, h: 1.5, 
+      fill: { color: 'F8FAFC' }, 
+      line: { color: 'E2E8F0', width: 1 }
+    });
     slide2.addText('80М+', { 
-      x: 0.5, y: 1.3, w: 4.5, h: 0.8, 
+      x: 0.6, y: 1.3, w: 4.3, h: 0.5, 
       fontSize: 32, color: '1A2332', bold: true 
     });
     slide2.addText('активных потребителей готовы покупать ваши товары', { 
-      x: 0.5, y: 2.1, w: 4.5, h: 0.6, 
-      fontSize: 12, color: '333333' 
+      x: 0.6, y: 1.9, w: 4.3, h: 0.6, 
+      fontSize: 11, color: '475569' 
+    });
+    
+    // Card 2
+    slide2.addShape(pptx.ShapeType.rect, { 
+      x: 5.0, y: 1.2, w: 4.5, h: 1.5, 
+      fill: { color: 'F8FAFC' }, 
+      line: { color: 'E2E8F0', width: 1 }
     });
     slide2.addText('После 2022 года освободились ниши — реальные возможности', { 
-      x: 5, y: 1.3, w: 4.5, h: 0.8, 
-      fontSize: 12, color: '333333' 
+      x: 5.1, y: 1.5, w: 4.3, h: 0.9, 
+      fontSize: 11, color: '475569' 
+    });
+    
+    // Card 3
+    slide2.addShape(pptx.ShapeType.rect, { 
+      x: 0.5, y: 2.9, w: 4.5, h: 1.5, 
+      fill: { color: 'F8FAFC' }, 
+      line: { color: 'E2E8F0', width: 1 }
     });
     slide2.addText('Жители России готовы пробовать товары из дружественных стран', { 
-      x: 0.5, y: 2.9, w: 4.5, h: 0.8, 
-      fontSize: 12, color: '333333' 
+      x: 0.6, y: 3.2, w: 4.3, h: 0.9, 
+      fontSize: 11, color: '475569' 
+    });
+    
+    // Card 4
+    slide2.addShape(pptx.ShapeType.rect, { 
+      x: 5.0, y: 2.9, w: 4.5, h: 1.5, 
+      fill: { color: 'F8FAFC' }, 
+      line: { color: 'E2E8F0', width: 1 }
     });
     slide2.addText('Продукция из СНГ, Азии и Ближнего Востока — "своё, родное"', { 
-      x: 5, y: 2.9, w: 4.5, h: 0.8, 
-      fontSize: 12, color: '333333' 
+      x: 5.1, y: 3.2, w: 4.3, h: 0.9, 
+      fontSize: 11, color: '475569' 
     });
 
     // Slide 2: Market Potential
@@ -311,37 +339,65 @@ export default function Presentation2() {
     cases.forEach((caseItem, i) => {
       const caseSlide = pptx.addSlide();
       caseSlide.background = { color: 'F8FAFC' };
-      caseSlide.addText(`КЕЙС #${i + 1}`, { 
-        x: 0.5, y: 0.3, w: 9, h: 0.3, 
-        fontSize: 14, color: 'FFC800', bold: true 
+      
+      // Badge for case number
+      caseSlide.addShape(pptx.ShapeType.roundRect, { 
+        x: 0.5, y: 0.3, w: 1.2, h: 0.35, 
+        fill: { color: 'FFF7E6' }, 
+        line: { color: 'FFC800', width: 1 }
       });
+      caseSlide.addText(`КЕЙС #${i + 1}`, { 
+        x: 0.5, y: 0.32, w: 1.2, h: 0.3, 
+        fontSize: 13, color: 'FFC800', bold: true, align: 'center' 
+      });
+      
       caseSlide.addText(caseItem.title, { 
-        x: 0.5, y: 0.7, w: 9, h: 0.6, 
+        x: 0.5, y: 0.8, w: 9, h: 0.6, 
         fontSize: 24, color: '1A2332', bold: true 
       });
+      
+      // Task card
+      caseSlide.addShape(pptx.ShapeType.rect, { 
+        x: 0.7, y: 1.6, w: 8.6, h: 0.85, 
+        fill: { color: 'FFFFFF' }, 
+        line: { color: 'CBD5E1', width: 1 }
+      });
       caseSlide.addText('Задача', { 
-        x: 0.8, y: 1.5, w: 8.5, h: 0.3, 
-        fontSize: 14, color: '1A2332', bold: true 
+        x: 0.85, y: 1.65, w: 8.3, h: 0.25, 
+        fontSize: 13, color: '1A2332', bold: true 
       });
       caseSlide.addText(caseItem.task, { 
-        x: 0.8, y: 1.8, w: 8.5, h: 0.6, 
-        fontSize: 12, color: '333333' 
+        x: 0.85, y: 1.95, w: 8.3, h: 0.4, 
+        fontSize: 11, color: '475569' 
+      });
+      
+      // Solution card
+      caseSlide.addShape(pptx.ShapeType.rect, {         x: 0.7, y: 2.6, w: 8.6, h: 0.85, 
+        fill: { color: 'FFFBEB' }, 
+        line: { color: 'FFC800', width: 1 }
       });
       caseSlide.addText('Решение', { 
-        x: 0.8, y: 2.6, w: 8.5, h: 0.3, 
-        fontSize: 14, color: 'FFC800', bold: true 
+        x: 0.85, y: 2.65, w: 8.3, h: 0.25, 
+        fontSize: 13, color: 'FFC800', bold: true 
       });
       caseSlide.addText(caseItem.solution, { 
-        x: 0.8, y: 2.9, w: 8.5, h: 0.7, 
-        fontSize: 12, color: '333333' 
+        x: 0.85, y: 2.95, w: 8.3, h: 0.4, 
+        fontSize: 11, color: '475569' 
+      });
+      
+      // Result card
+      caseSlide.addShape(pptx.ShapeType.rect, { 
+        x: 0.7, y: 3.6, w: 8.6, h: 0.85, 
+        fill: { color: 'F0FDF4' }, 
+        line: { color: '22C55E', width: 1 }
       });
       caseSlide.addText('Результат', { 
-        x: 0.8, y: 3.8, w: 8.5, h: 0.3, 
-        fontSize: 14, color: '16A34A', bold: true 
+        x: 0.85, y: 3.65, w: 8.3, h: 0.25, 
+        fontSize: 13, color: '16A34A', bold: true 
       });
       caseSlide.addText(caseItem.result, { 
-        x: 0.8, y: 4.1, w: 8.5, h: 0.6, 
-        fontSize: 12, color: '333333' 
+        x: 0.85, y: 3.95, w: 8.3, h: 0.4, 
+        fontSize: 11, color: '475569' 
       });
     });
 
@@ -352,23 +408,56 @@ export default function Presentation2() {
       fontSize: 28, color: '1A2332', bold: true, align: 'center' 
     });
     const packages = [
-      { name: 'Старт', price: '$3,000' },
-      { name: 'Стандарт', price: '$7,000' },
-      { name: 'Премиум', price: '$15,000' }
+      { name: 'Старт', price: '$3,000', highlight: false },
+      { name: 'Стандарт', price: '$7,000', highlight: true },
+      { name: 'Премиум', price: '$15,000', highlight: false }
     ];
     packages.forEach((pkg, i) => {
-      slide16.addText(pkg.name, { 
-        x: 0.5 + i * 3.2, y: 1.3, w: 2.8, h: 0.4, 
-        fontSize: 16, color: '1A2332', bold: true, align: 'center' 
+      // Package card
+      slide16.addShape(pptx.ShapeType.rect, { 
+        x: 0.5 + i * 3.2, y: 1.1, w: 2.8, h: 1.8, 
+        fill: { color: pkg.highlight ? 'FFFBEB' : 'F8FAFC' }, 
+        line: { color: pkg.highlight ? 'FFC800' : 'CBD5E1', width: pkg.highlight ? 2 : 1 }
       });
+      
+      if (pkg.highlight) {
+        slide16.addShape(pptx.ShapeType.roundRect, { 
+          x: 0.9 + i * 3.2, y: 1.2, w: 2, h: 0.3, 
+          fill: { color: 'FFC800' }
+        });
+        slide16.addText('ПОПУЛЯРНЫЙ', { 
+          x: 0.9 + i * 3.2, y: 1.22, w: 2, h: 0.26, 
+          fontSize: 9, color: 'FFFFFF', bold: true, align: 'center' 
+        });
+      }
+      
+      slide16.addText(pkg.name, { 
+        x: 0.5 + i * 3.2, y: pkg.highlight ? 1.6 : 1.3, w: 2.8, h: 0.4, 
+        fontSize: 18, color: '1A2332', bold: true, align: 'center' 
+        });
       slide16.addText(pkg.price, { 
-        x: 0.5 + i * 3.2, y: 1.8, w: 2.8, h: 0.5, 
-        fontSize: 20, color: 'FFC800', bold: true, align: 'center' 
+        x: 0.5 + i * 3.2, y: pkg.highlight ? 2.0 : 1.8, w: 2.8, h: 0.5, 
+        fontSize: 22, color: 'FFC800', bold: true, align: 'center' 
+      });
+      slide16.addText('/ месяц', { 
+        x: 0.5 + i * 3.2, y: pkg.highlight ? 2.5 : 2.3, w: 2.8, h: 0.3, 
+        fontSize: 10, color: '64748B', align: 'center' 
       });
     });
-    slide16.addText('Разовая консультация: $500\nРазовая публикация: от $300\nОрганизация мероприятия: от $2,000', { 
-      x: 0.5, y: 3.5, w: 9, h: 1, 
-      fontSize: 12, color: '333333', align: 'center' 
+    
+    // Additional services
+    slide16.addShape(pptx.ShapeType.rect, { 
+      x: 0.5, y: 3.3, w: 9, h: 1.5, 
+      fill: { color: 'EEF2FF' }, 
+      line: { color: '1A2332', width: 1 }
+    });
+    slide16.addText('Дополнительные услуги:', { 
+      x: 0.7, y: 3.45, w: 8.6, h: 0.25, 
+      fontSize: 13, color: '1A2332', bold: true 
+    });
+    slide16.addText('• Разовая консультация: $500 — анализ и рекомендации\n• Разовая публикация: от $300 — статья в выбранном СМИ\n• Организация мероприятия: от $2,000 — блог-тур, презентация', { 
+      x: 0.7, y: 3.75, w: 8.6, h: 0.9, 
+      fontSize: 10, color: '475569' 
     });
 
     // Slide 17: Workflow
@@ -378,22 +467,46 @@ export default function Presentation2() {
       fontSize: 28, color: '1A2332', bold: true, align: 'center' 
     });
     const steps = [
-      { num: '1', title: 'Знакомство и анализ', time: '1-2 недели' },
-      { num: '2', title: 'Разработка стратегии', time: '1 неделя' },
-      { num: '3', title: 'Реализация и контроль', time: 'Постоянно' }
+      { num: '1', title: 'Знакомство и анализ', desc: 'Изучаем бренд, ЦА, анализируем конкурентов', time: '1-2 недели' },
+      { num: '2', title: 'Разработка стратегии', desc: 'Медиаплан на 3-6 месяцев, подбор площадок', time: '1 неделя' },
+      { num: '3', title: 'Реализация и контроль', desc: 'Запуск активностей, отчётность, корректировки', time: 'Постоянно' }
     ];
     steps.forEach((step, i) => {
-      slide17.addText(step.num, { 
-        x: 0.8, y: 1.2 + i * 1.3, w: 0.6, h: 0.6, 
-        fontSize: 24, color: 'FFC800', bold: true, align: 'center' 
+      // Step card
+      slide17.addShape(pptx.ShapeType.rect, { 
+        x: 0.6, y: 1.1 + i * 1.35, w: 8.8, h: 1.1, 
+        fill: { color: 'F8FAFC' }, 
+        line: { color: 'CBD5E1', width: 1 }
       });
+      
+      // Number badge
+      slide17.addShape(pptx.ShapeType.roundRect, { 
+        x: 0.75, y: 1.25 + i * 1.35, w: 0.6, h: 0.6, 
+        fill: { color: 'FFC800' }
+      });
+      slide17.addText(step.num, { 
+        x: 0.75, y: 1.28 + i * 1.35, w: 0.6, h: 0.54, 
+        fontSize: 26, color: 'FFFFFF', bold: true, align: 'center', valign: 'middle' 
+      });
+      
       slide17.addText(step.title, { 
-        x: 1.6, y: 1.2 + i * 1.3, w: 7.5, h: 0.4, 
+        x: 1.5, y: 1.2 + i * 1.35, w: 7.5, h: 0.35, 
         fontSize: 16, color: '1A2332', bold: true 
       });
+      slide17.addText(step.desc, { 
+        x: 1.5, y: 1.58 + i * 1.35, w: 7.5, h: 0.3, 
+        fontSize: 11, color: '475569' 
+      });
+      
+      // Time badge
+      slide17.addShape(pptx.ShapeType.roundRect, { 
+        x: 1.5, y: 1.9 + i * 1.35, w: 1.4, h: 0.25, 
+        fill: { color: 'FFF7E6' }, 
+        line: { color: 'FFC800', width: 1 }
+      });
       slide17.addText(step.time, { 
-        x: 1.6, y: 1.65 + i * 1.3, w: 7.5, h: 0.3, 
-        fontSize: 11, color: 'FFC800', bold: true 
+        x: 1.52, y: 1.92 + i * 1.35, w: 1.36, h: 0.21, 
+        fontSize: 9, color: 'FFC800', bold: true, align: 'center' 
       });
     });
 
@@ -402,31 +515,51 @@ export default function Presentation2() {
     slide18.background = { color: '1A2332' };
     slide18.addText('Готовы начать?', { 
       x: 0.5, y: 0.5, w: 9, h: 0.5, 
-      fontSize: 32, color: 'FFFFFF', bold: true, align: 'center' 
+      fontSize: 36, color: 'FFFFFF', bold: true, align: 'center' 
     });
     slide18.addText('Свяжитесь с нами для бесплатной консультации', { 
       x: 0.5, y: 1.1, w: 9, h: 0.4, 
-      fontSize: 16, color: 'FFFFFF', align: 'center' 
+      fontSize: 18, color: 'FFFFFF', align: 'center', italic: true 
     });
+    
+    // Contact card
+    slide18.addShape(pptx.ShapeType.rect, { 
+      x: 2, y: 1.9, w: 6, h: 2.3, 
+      fill: { color: '1E293B' }, 
+      line: { color: 'FFC800', width: 2 }
+    });
+    
     slide18.addText('Софья Казакова', { 
-      x: 0.5, y: 2, w: 9, h: 0.5, 
-      fontSize: 24, color: 'FFFFFF', bold: true, align: 'center' 
+      x: 2.2, y: 2.1, w: 5.6, h: 0.4, 
+      fontSize: 26, color: 'FFFFFF', bold: true, align: 'center' 
     });
     slide18.addText('Руководитель проектов', { 
-      x: 0.5, y: 2.5, w: 9, h: 0.4, 
+      x: 2.2, y: 2.55, w: 5.6, h: 0.3, 
       fontSize: 16, color: 'FFC800', align: 'center' 
     });
+    
+    // Divider
+    slide18.addShape(pptx.ShapeType.rect, { 
+      x: 2.5, y: 2.95, w: 5, h: 0.02, 
+      fill: { color: 'FFC800' }
+    });
+    
     slide18.addText('📧 s.kazakova@centre.digital', { 
-      x: 0.5, y: 3.2, w: 9, h: 0.3, 
-      fontSize: 14, color: 'FFFFFF', align: 'center' 
+      x: 2.2, y: 3.15, w: 5.6, h: 0.3, 
+      fontSize: 13, color: 'FFFFFF', align: 'center' 
     });
     slide18.addText('📱 @sofiakz', { 
-      x: 0.5, y: 3.6, w: 9, h: 0.3, 
-      fontSize: 14, color: 'FFFFFF', align: 'center' 
+      x: 2.2, y: 3.5, w: 5.6, h: 0.3, 
+      fontSize: 13, color: 'FFFFFF', align: 'center' 
     });
     slide18.addText('📞 +7 905 768 22 05', { 
-      x: 0.5, y: 4, w: 9, h: 0.3, 
-      fontSize: 14, color: 'FFFFFF', align: 'center' 
+      x: 2.2, y: 3.85, w: 5.6, h: 0.3, 
+      fontSize: 13, color: 'FFFFFF', align: 'center' 
+    });
+    
+    slide18.addText('Centre digital & media — ваш путь к успеху в России', { 
+      x: 0.5, y: 4.8, w: 9, h: 0.3, 
+      fontSize: 12, color: 'CBD5E1', align: 'center', italic: true 
     });
 
     pptx.writeFile({ fileName: 'Centre_Digital_Media_Presentation_v2.pptx' });
