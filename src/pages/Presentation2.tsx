@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
+import pptxgen from 'pptxgenjs';
+import { Link } from 'react-router-dom';
 
 const slides = [
   { id: 'cover', title: 'Обложка' },
@@ -46,6 +48,388 @@ export default function Presentation2() {
 
   const getWaveOffset = () => {
     return currentSlide * 120;
+  };
+
+  const exportToPPTX = () => {
+    const pptx = new pptxgen();
+    
+    pptx.defineLayout({ name: 'A4', width: 10, height: 5.625 });
+    pptx.layout = 'A4';
+
+    // Slide 0: Cover
+    const slide1 = pptx.addSlide();
+    slide1.background = { color: '1A2332' };
+    slide1.addText('Centre digital & media', { 
+      x: 0.5, y: 1, w: 9, h: 0.5, 
+      fontSize: 18, color: 'FFC800', bold: true, align: 'center' 
+    });
+    slide1.addText('Ваш надежный\nPR-партнер для выхода\nв Россию', { 
+      x: 0.5, y: 1.8, w: 9, h: 1.5, 
+      fontSize: 36, color: 'FFFFFF', bold: true, align: 'center' 
+    });
+    slide1.addText('Полный цикл услуг медиапродвижения для брендов из дружественных стран', { 
+      x: 1, y: 3.8, w: 8, h: 0.5, 
+      fontSize: 16, color: 'FFFFFF', align: 'center' 
+    });
+
+    // Slide 1: Market
+    const slide2 = pptx.addSlide();
+    slide2.addText('Российский рынок сегодня', { 
+      x: 0.5, y: 0.4, w: 9, h: 0.5, 
+      fontSize: 28, color: '1A2332', bold: true, align: 'center' 
+    });
+    slide2.addText('80М+', { 
+      x: 0.5, y: 1.3, w: 4.5, h: 0.8, 
+      fontSize: 32, color: '1A2332', bold: true 
+    });
+    slide2.addText('активных потребителей готовы покупать ваши товары', { 
+      x: 0.5, y: 2.1, w: 4.5, h: 0.6, 
+      fontSize: 12, color: '333333' 
+    });
+    slide2.addText('После 2022 года освободились ниши — реальные возможности', { 
+      x: 5, y: 1.3, w: 4.5, h: 0.8, 
+      fontSize: 12, color: '333333' 
+    });
+    slide2.addText('Жители России готовы пробовать товары из дружественных стран', { 
+      x: 0.5, y: 2.9, w: 4.5, h: 0.8, 
+      fontSize: 12, color: '333333' 
+    });
+    slide2.addText('Продукция из СНГ, Азии и Ближнего Востока — "своё, родное"', { 
+      x: 5, y: 2.9, w: 4.5, h: 0.8, 
+      fontSize: 12, color: '333333' 
+    });
+
+    // Slide 2: Market Potential
+    const slide3 = pptx.addSlide();
+    slide3.background = { color: '1A2332' };
+    slide3.addText('85%', { 
+      x: 0.5, y: 1.2, w: 9, h: 1, 
+      fontSize: 64, color: 'FFC800', bold: true, align: 'center' 
+    });
+    slide3.addText('ваших будущих клиентов живут и принимают решения\nза пределами Москвы', { 
+      x: 0.5, y: 2.3, w: 9, h: 0.8, 
+      fontSize: 20, color: 'FFFFFF', align: 'center' 
+    });
+    slide3.addText('Главный актив бизнеса — регионы страны!', { 
+      x: 0.5, y: 3.3, w: 9, h: 0.6, 
+      fontSize: 28, color: 'FFFFFF', bold: true, align: 'center' 
+    });
+
+    // Slide 3: Regions
+    const slide4 = pptx.addSlide();
+    slide4.addText('У каждого города России –\nсвой культурный код и свой покупатель!', { 
+      x: 0.5, y: 0.3, w: 9, h: 0.7, 
+      fontSize: 24, color: '1A2332', bold: true, align: 'center' 
+    });
+    const cities = [
+      'Ижевск — промышленный кластер',
+      'Казань — перекресток культур',
+      'Екатеринбург — деловая столица Урала',
+      'Новосибирск — научный хаб Сибири',
+      'Краснодар — курортный центр Юга',
+      'Нижний Новгород — кластер Поволжья',
+      'Ростов-на-Дону — ворота Кавказа'
+    ];
+    cities.forEach((city, i) => {
+      slide4.addText('• ' + city, { 
+        x: i < 4 ? 0.8 : 5.3, 
+        y: 1.2 + (i % 4) * 0.6, 
+        w: 4, h: 0.5, 
+        fontSize: 11, color: '333333' 
+      });
+    });
+    slide4.addText('Мы знаем эти города — работаем среди них более 19 лет!', { 
+      x: 0.5, y: 4.6, w: 9, h: 0.5, 
+      fontSize: 16, color: '1A2332', bold: true, align: 'center' 
+    });
+
+    // Slide 4: About
+    const slide5 = pptx.addSlide();
+    slide5.addText('Centre digital & media — ваш PR-мост в Россию', { 
+      x: 0.5, y: 0.3, w: 9, h: 0.5, 
+      fontSize: 24, color: '1A2332', bold: true, align: 'center' 
+    });
+    slide5.addText('Полный цикл услуг для продвижения бренда в регионах', { 
+      x: 0.5, y: 0.85, w: 9, h: 0.4, 
+      fontSize: 16, color: '666666', align: 'center' 
+    });
+    const services = [
+      'Стратегия и выход',
+      'Контент и коммуникации',
+      'PR и GR',
+      'Продакшн',
+      'Медиазакупки',
+      'Аналитика'
+    ];
+    services.forEach((service, i) => {
+      slide5.addText(service, { 
+        x: 0.5 + (i % 3) * 3.2, 
+        y: 1.6 + Math.floor(i / 3) * 1.5, 
+        w: 2.8, h: 1, 
+        fontSize: 12, color: '1A2332', bold: true 
+      });
+    });
+
+    // Slide 5: Why Us
+    const slide6 = pptx.addSlide();
+    slide6.addText('Почему выбирают нас', { 
+      x: 0.5, y: 0.3, w: 9, h: 0.5, 
+      fontSize: 28, color: '1A2332', bold: true, align: 'center' 
+    });
+    const reasons = [
+      'Понимаем обе стороны',
+      'Выход на региональные СМИ',
+      'Работаем с нуля',
+      'Быстрые результаты',
+      'Прозрачная отчетность',
+      'Проверенный опыт'
+    ];
+    reasons.forEach((reason, i) => {
+      slide6.addText('• ' + reason, { 
+        x: i < 3 ? 0.8 : 5.3, 
+        y: 1.2 + (i % 3) * 1.2, 
+        w: 4, h: 0.9, 
+        fontSize: 11, color: '333333', bold: true 
+      });
+    });
+
+    // Slide 6: Problems
+    const slide7 = pptx.addSlide();
+    slide7.addText('Главные проблемы при выходе на рынок России', { 
+      x: 0.5, y: 0.3, w: 9, h: 0.5, 
+      fontSize: 24, color: '1A2332', bold: true, align: 'center' 
+    });
+    const problems = [
+      'Отсутствие доверия',
+      'Нет нужных контактов',
+      'Языковой барьер',
+      'Непонимание культурных кодов',
+      'Большие бюджеты',
+      'Долгий путь к результату'
+    ];
+    problems.forEach((problem, i) => {
+      slide7.addText('❌ ' + problem, { 
+        x: i < 3 ? 0.8 : 5.3, 
+        y: 1.2 + (i % 3) * 1.2, 
+        w: 4, h: 0.9, 
+        fontSize: 11, color: 'CC0000', bold: true 
+      });
+    });
+
+    // Slide 7: Solutions
+    const slide8 = pptx.addSlide();
+    slide8.addText('Наши решения', { 
+      x: 0.5, y: 0.3, w: 9, h: 0.5, 
+      fontSize: 28, color: '1A2332', bold: true, align: 'center' 
+    });
+    const solutions = [
+      'Формируем доверие через PR',
+      'Используем готовую сеть контактов',
+      'Говорим на языке аудитории',
+      'Учитываем местную специфику',
+      'Эффективно расходуем бюджет',
+      'Обеспечиваем быстрый старт'
+    ];
+    solutions.forEach((solution, i) => {
+      slide8.addText('✅ ' + solution, { 
+        x: i < 3 ? 0.8 : 5.3, 
+        y: 1.2 + (i % 3) * 1.2, 
+        w: 4, h: 0.9, 
+        fontSize: 11, color: '006600', bold: true 
+      });
+    });
+
+    // Slide 8: Services
+    const slide9 = pptx.addSlide();
+    slide9.addText('Наши услуги', { 
+      x: 0.5, y: 0.3, w: 9, h: 0.5, 
+      fontSize: 28, color: '1A2332', bold: true, align: 'center' 
+    });
+    const servicesList = [
+      'Публикации в СМИ',
+      'Работа с блогерами',
+      'Организация мероприятий',
+      'Фото- и видеопроизводство',
+      'Аналитика и стратегия',
+      'Управление репутацией'
+    ];
+    servicesList.forEach((service, i) => {
+      slide9.addText('• ' + service, { 
+        x: i < 3 ? 0.8 : 5.3, 
+        y: 1.2 + (i % 3) * 1.2, 
+        w: 4, h: 0.9, 
+        fontSize: 11, color: '333333', bold: true 
+      });
+    });
+
+    // Cases slides (9-15)
+    const cases = [
+      {
+        title: 'Блог-тур для представителей СМИ',
+        task: 'Представить новый гостиничный комплекс федеральным и региональным журналистам',
+        solution: 'Организовали двухдневный блог-тур: проживание, экскурсии, знакомство с концепцией',
+        result: '22 публикации в топовых изданиях, охват 5+ млн читателей'
+      },
+      {
+        title: 'Вывод на рынок азиатских пельменей',
+        task: 'Познакомить российского покупателя с новым продуктом',
+        solution: 'Провели дегустации в торговых сетях, съемки для ТВ и блогеров',
+        result: 'Рост продаж на 40% за 3 месяца, 15 публикаций'
+      },
+      {
+        title: 'Запуск павильона на ВДНХ',
+        task: 'Обеспечить информационную поддержку открытия павильона',
+        solution: 'Пресс-релизы, пресс-подход, интервью, инфоповоды в телеграм',
+        result: '30+ публикаций в федеральных СМИ, посещаемость +60%'
+      },
+      {
+        title: 'Спортивное событие: турнир по хоккею',
+        task: 'Привлечь внимание к международному юношескому турниру',
+        solution: 'Работа со спортивными СМИ: анонсы, репортажи, интервью',
+        result: '18 публикаций, заполняемость трибун с 30% до 80%'
+      },
+      {
+        title: 'Имиджевый видеоролик для производителя',
+        task: 'Создать видеоконтент для презентации завода на выставках',
+        solution: 'Съемка производства, интервью, монтаж с субтитрами на 3 языках',
+        result: 'Рост запросов от дистрибьюторов на 35%'
+      },
+      {
+        title: 'Проект "Легендарные конструкторы"',
+        task: 'Продвижение серии образовательных конструкторов для детей',
+        solution: 'Мастер-классы в школах, обзоры у блогеров, статьи',
+        result: 'Охват 2000+ детей и родителей, узнаваемость +45%'
+      },
+      {
+        title: 'Информационная поддержка экспортного проекта',
+        task: 'Рассказать о новых экспортных направлениях в страны Азии',
+        solution: 'Серия публикаций в деловых СМИ, интервью, кейс-стади',
+        result: '20 публикаций в бизнес-изданиях, привлечение партнеров'
+      }
+    ];
+
+    cases.forEach((caseItem, i) => {
+      const caseSlide = pptx.addSlide();
+      caseSlide.background = { color: 'F8FAFC' };
+      caseSlide.addText(`КЕЙС #${i + 1}`, { 
+        x: 0.5, y: 0.3, w: 9, h: 0.3, 
+        fontSize: 14, color: 'FFC800', bold: true 
+      });
+      caseSlide.addText(caseItem.title, { 
+        x: 0.5, y: 0.7, w: 9, h: 0.6, 
+        fontSize: 24, color: '1A2332', bold: true 
+      });
+      caseSlide.addText('Задача', { 
+        x: 0.8, y: 1.5, w: 8.5, h: 0.3, 
+        fontSize: 14, color: '1A2332', bold: true 
+      });
+      caseSlide.addText(caseItem.task, { 
+        x: 0.8, y: 1.8, w: 8.5, h: 0.6, 
+        fontSize: 12, color: '333333' 
+      });
+      caseSlide.addText('Решение', { 
+        x: 0.8, y: 2.6, w: 8.5, h: 0.3, 
+        fontSize: 14, color: 'FFC800', bold: true 
+      });
+      caseSlide.addText(caseItem.solution, { 
+        x: 0.8, y: 2.9, w: 8.5, h: 0.7, 
+        fontSize: 12, color: '333333' 
+      });
+      caseSlide.addText('Результат', { 
+        x: 0.8, y: 3.8, w: 8.5, h: 0.3, 
+        fontSize: 14, color: '16A34A', bold: true 
+      });
+      caseSlide.addText(caseItem.result, { 
+        x: 0.8, y: 4.1, w: 8.5, h: 0.6, 
+        fontSize: 12, color: '333333' 
+      });
+    });
+
+    // Slide 16: Packages
+    const slide16 = pptx.addSlide();
+    slide16.addText('Пакеты услуг', { 
+      x: 0.5, y: 0.3, w: 9, h: 0.5, 
+      fontSize: 28, color: '1A2332', bold: true, align: 'center' 
+    });
+    const packages = [
+      { name: 'Старт', price: '$3,000' },
+      { name: 'Стандарт', price: '$7,000' },
+      { name: 'Премиум', price: '$15,000' }
+    ];
+    packages.forEach((pkg, i) => {
+      slide16.addText(pkg.name, { 
+        x: 0.5 + i * 3.2, y: 1.3, w: 2.8, h: 0.4, 
+        fontSize: 16, color: '1A2332', bold: true, align: 'center' 
+      });
+      slide16.addText(pkg.price, { 
+        x: 0.5 + i * 3.2, y: 1.8, w: 2.8, h: 0.5, 
+        fontSize: 20, color: 'FFC800', bold: true, align: 'center' 
+      });
+    });
+    slide16.addText('Разовая консультация: $500\nРазовая публикация: от $300\nОрганизация мероприятия: от $2,000', { 
+      x: 0.5, y: 3.5, w: 9, h: 1, 
+      fontSize: 12, color: '333333', align: 'center' 
+    });
+
+    // Slide 17: Workflow
+    const slide17 = pptx.addSlide();
+    slide17.addText('Как мы работаем', { 
+      x: 0.5, y: 0.3, w: 9, h: 0.5, 
+      fontSize: 28, color: '1A2332', bold: true, align: 'center' 
+    });
+    const steps = [
+      { num: '1', title: 'Знакомство и анализ', time: '1-2 недели' },
+      { num: '2', title: 'Разработка стратегии', time: '1 неделя' },
+      { num: '3', title: 'Реализация и контроль', time: 'Постоянно' }
+    ];
+    steps.forEach((step, i) => {
+      slide17.addText(step.num, { 
+        x: 0.8, y: 1.2 + i * 1.3, w: 0.6, h: 0.6, 
+        fontSize: 24, color: 'FFC800', bold: true, align: 'center' 
+      });
+      slide17.addText(step.title, { 
+        x: 1.6, y: 1.2 + i * 1.3, w: 7.5, h: 0.4, 
+        fontSize: 16, color: '1A2332', bold: true 
+      });
+      slide17.addText(step.time, { 
+        x: 1.6, y: 1.65 + i * 1.3, w: 7.5, h: 0.3, 
+        fontSize: 11, color: 'FFC800', bold: true 
+      });
+    });
+
+    // Slide 18: Contact
+    const slide18 = pptx.addSlide();
+    slide18.background = { color: '1A2332' };
+    slide18.addText('Готовы начать?', { 
+      x: 0.5, y: 0.5, w: 9, h: 0.5, 
+      fontSize: 32, color: 'FFFFFF', bold: true, align: 'center' 
+    });
+    slide18.addText('Свяжитесь с нами для бесплатной консультации', { 
+      x: 0.5, y: 1.1, w: 9, h: 0.4, 
+      fontSize: 16, color: 'FFFFFF', align: 'center' 
+    });
+    slide18.addText('Софья Казакова', { 
+      x: 0.5, y: 2, w: 9, h: 0.5, 
+      fontSize: 24, color: 'FFFFFF', bold: true, align: 'center' 
+    });
+    slide18.addText('Руководитель проектов', { 
+      x: 0.5, y: 2.5, w: 9, h: 0.4, 
+      fontSize: 16, color: 'FFC800', align: 'center' 
+    });
+    slide18.addText('📧 s.kazakova@centre.digital', { 
+      x: 0.5, y: 3.2, w: 9, h: 0.3, 
+      fontSize: 14, color: 'FFFFFF', align: 'center' 
+    });
+    slide18.addText('📱 @sofiakz', { 
+      x: 0.5, y: 3.6, w: 9, h: 0.3, 
+      fontSize: 14, color: 'FFFFFF', align: 'center' 
+    });
+    slide18.addText('📞 +7 905 768 22 05', { 
+      x: 0.5, y: 4, w: 9, h: 0.3, 
+      fontSize: 14, color: 'FFFFFF', align: 'center' 
+    });
+
+    pptx.writeFile({ fileName: 'Centre_Digital_Media_Presentation_v2.pptx' });
   };
 
   return (
@@ -110,6 +494,26 @@ export default function Presentation2() {
 
       {/* Main Content */}
       <div className="ml-16 min-h-screen relative z-20">
+        {/* Export Button */}
+        <Button
+          onClick={exportToPPTX}
+          variant="secondary"
+          className="fixed top-6 right-6 z-50 shadow-xl"
+        >
+          <Icon name="Download" size={20} />
+          Скачать PPTX
+        </Button>
+
+        {/* Version Switcher */}
+        <Link to="/">
+          <Button
+            variant="outline"
+            className="fixed top-6 right-52 z-50 shadow-xl bg-white"
+          >
+            <Icon name="Layers" size={20} />
+            Вариант 1
+          </Button>
+        </Link>
         {/* Slide 0: Cover */}
         {currentSlide === 0 && (
           <div className="min-h-screen flex items-center justify-center p-12 bg-gradient-to-br from-primary to-primary/90 animate-fade-in">

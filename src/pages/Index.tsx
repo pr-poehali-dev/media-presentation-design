@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
 import pptxgen from 'pptxgenjs';
+import { Link } from 'react-router-dom';
 
 const slides = [
   { id: 'cover', title: 'Обложка' },
@@ -432,6 +433,17 @@ export default function Index() {
           <Icon name="Download" />
           Скачать PPTX
         </Button>
+
+        {/* Version Switcher */}
+        <Link to="/v2">
+          <Button
+            variant="outline"
+            className="fixed top-8 right-56 z-50 shadow-xl bg-white"
+          >
+            <Icon name="Layers" size={20} />
+            Вариант 2
+          </Button>
+        </Link>
 
         {/* Slide 0: Cover */}
         {currentSlide === 0 && (
