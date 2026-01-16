@@ -4,6 +4,7 @@ import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
 import pptxgen from 'pptxgenjs';
 import { Link } from 'react-router-dom';
+import jsPDF from 'jspdf';
 
 const slides = [
   { id: 'cover', title: 'Обложка' },
@@ -44,6 +45,73 @@ export default function Index() {
     if (currentSlide > 0) {
       setCurrentSlide(currentSlide - 1);
     }
+  };
+
+  const exportToPDF = () => {
+    const pdf = new jsPDF('landscape', 'mm', [297, 210]);
+    
+    // Cover
+    pdf.setFillColor(26, 35, 50);
+    pdf.rect(0, 0, 297, 210, 'F');
+    pdf.setTextColor(255, 200, 0);
+    pdf.setFontSize(24);
+    pdf.text('Centre digital & media', 148.5, 50, { align: 'center' });
+    pdf.setTextColor(255, 255, 255);
+    pdf.setFontSize(48);
+    pdf.text('Ваш надежный', 148.5, 85, { align: 'center' });
+    pdf.text('PR-партнер для выхода', 148.5, 105, { align: 'center' });
+    pdf.text('в Россию', 148.5, 125, { align: 'center' });
+    pdf.setFontSize(20);
+    pdf.text('Полный цикл услуг медиапродвижения для брендов из дружественных стран', 148.5, 155, { align: 'center' });
+
+    // Market
+    pdf.addPage();
+    pdf.setFillColor(255, 255, 255);
+    pdf.rect(0, 0, 297, 210, 'F');
+    pdf.setTextColor(26, 35, 50);
+    pdf.setFontSize(36);
+    pdf.text('Российский рынок сегодня', 148.5, 30, { align: 'center' });
+    pdf.setFontSize(18);
+    pdf.text('80М+', 50, 70);
+    pdf.setFontSize(14);
+    pdf.text('активных потребителей готовы покупать ваши товары', 50, 85, { maxWidth: 90 });
+    pdf.text('После 2022 года освободились ниши — реальные возможности', 160, 70, { maxWidth: 90 });
+
+    // Market Potential
+    pdf.addPage();
+    pdf.setFillColor(26, 35, 50);
+    pdf.rect(0, 0, 297, 210, 'F');
+    pdf.setTextColor(255, 200, 0);
+    pdf.setFontSize(72);
+    pdf.text('85%', 148.5, 80, { align: 'center' });
+    pdf.setTextColor(255, 255, 255);
+    pdf.setFontSize(24);
+    pdf.text('ваших будущих клиентов живут и принимают решения', 148.5, 110, { align: 'center' });
+    pdf.text('за пределами Москвы', 148.5, 125, { align: 'center' });
+    pdf.setFontSize(32);
+    pdf.text('Главный актив бизнеса — регионы страны!', 148.5, 155, { align: 'center' });
+
+    // Contact
+    pdf.addPage();
+    pdf.setFillColor(26, 35, 50);
+    pdf.rect(0, 0, 297, 210, 'F');
+    pdf.setTextColor(255, 255, 255);
+    pdf.setFontSize(36);
+    pdf.text('Готовы начать?', 148.5, 45, { align: 'center' });
+    pdf.setFontSize(18);
+    pdf.text('Свяжитесь с нами для бесплатной консультации', 148.5, 65, { align: 'center' });
+    pdf.setFontSize(32);
+    pdf.text('Софья Казакова', 148.5, 105, { align: 'center' });
+    pdf.setTextColor(255, 200, 0);
+    pdf.setFontSize(20);
+    pdf.text('Руководитель проектов', 148.5, 125, { align: 'center' });
+    pdf.setTextColor(255, 255, 255);
+    pdf.setFontSize(18);
+    pdf.text('s.kazakova@centre.digital', 148.5, 150, { align: 'center' });
+    pdf.text('@sofiakz', 148.5, 165, { align: 'center' });
+    pdf.text('+7 905 768 22 05', 148.5, 180, { align: 'center' });
+
+    pdf.save('Centre_Digital_Media_Presentation.pdf');
   };
 
   const exportToPPTX = () => {
@@ -424,21 +492,31 @@ export default function Index() {
 
       {/* Main Content */}
       <div className="ml-20 min-h-screen relative">
-        {/* Export Button */}
-        <Button
-          onClick={exportToPPTX}
-          variant="secondary"
-          className="fixed top-8 right-8 z-50 shadow-xl"
-        >
-          <Icon name="Download" />
-          Скачать PPTX
-        </Button>
+        {/* Export Buttons */}
+        <div className="fixed top-8 right-8 z-50 flex gap-3">
+          <Button
+            onClick={exportToPDF}
+            variant="secondary"
+            className="shadow-xl"
+          >
+            <Icon name="FileDown" size={20} />
+            PDF
+          </Button>
+          <Button
+            onClick={exportToPPTX}
+            variant="secondary"
+            className="shadow-xl"
+          >
+            <Icon name="Download" />
+            PPTX
+          </Button>
+        </div>
 
         {/* Version Switcher */}
         <Link to="/v2">
           <Button
             variant="outline"
-            className="fixed top-8 right-56 z-50 shadow-xl bg-white"
+            className="fixed top-8 right-72 z-50 shadow-xl bg-white"
           >
             <Icon name="Layers" size={20} />
             Вариант 2

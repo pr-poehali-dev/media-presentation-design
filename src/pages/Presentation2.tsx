@@ -4,6 +4,8 @@ import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
 import pptxgen from 'pptxgenjs';
 import { Link } from 'react-router-dom';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 const slides = [
   { id: 'cover', title: 'Обложка' },
@@ -48,6 +50,84 @@ export default function Presentation2() {
 
   const getWaveOffset = () => {
     return currentSlide * 120;
+  };
+
+  const exportToPDF = () => {
+    const pdf = new jsPDF('landscape', 'mm', [297, 210]); // A4 landscape
+    
+    // Slide 0: Cover
+    pdf.setFillColor(26, 35, 50); // #1A2332
+    pdf.rect(0, 0, 297, 210, 'F');
+    pdf.setTextColor(255, 200, 0); // #FFC800
+    pdf.setFontSize(18);
+    pdf.text('Centre digital & media', 148.5, 40, { align: 'center' });
+    pdf.setTextColor(255, 255, 255);
+    pdf.setFontSize(36);
+    pdf.text('Ваш надежный', 148.5, 80, { align: 'center' });
+    pdf.text('PR-партнер для выхода', 148.5, 95, { align: 'center' });
+    pdf.text('в Россию', 148.5, 110, { align: 'center' });
+    pdf.setFontSize(16);
+    pdf.text('Полный цикл услуг медиапродвижения для брендов из дружественных стран', 148.5, 140, { align: 'center' });
+
+    // Slide 1: Market (добавлю несколько ключевых слайдов)
+    pdf.addPage();
+    pdf.setFillColor(255, 255, 255);
+    pdf.rect(0, 0, 297, 210, 'F');
+    pdf.setTextColor(26, 35, 50);
+    pdf.setFontSize(28);
+    pdf.text('Российский рынок сегодня', 148.5, 30, { align: 'center' });
+    
+    pdf.setFontSize(32);
+    pdf.text('80М+', 50, 70);
+    pdf.setFontSize(11);
+    pdf.text('активных потребителей готовы покупать ваши товары', 50, 85, { maxWidth: 100 });
+    
+    pdf.setFontSize(11);
+    pdf.text('После 2022 года освободились ниши — реальные возможности', 160, 70, { maxWidth: 100 });
+    pdf.text('Жители России готовы пробовать товары из дружественных стран', 50, 130, { maxWidth: 100 });
+    pdf.text('Продукция из СНГ, Азии и Ближнего Востока — "своё, родное"', 160, 130, { maxWidth: 100 });
+
+    // Slide 2: Market Potential
+    pdf.addPage();
+    pdf.setFillColor(26, 35, 50);
+    pdf.rect(0, 0, 297, 210, 'F');
+    pdf.setTextColor(255, 200, 0);
+    pdf.setFontSize(64);
+    pdf.text('85%', 148.5, 70, { align: 'center' });
+    pdf.setTextColor(255, 255, 255);
+    pdf.setFontSize(20);
+    pdf.text('ваших будущих клиентов живут и принимают решения', 148.5, 100, { align: 'center' });
+    pdf.text('за пределами Москвы', 148.5, 115, { align: 'center' });
+    pdf.setFontSize(28);
+    pdf.text('Главный актив бизнеса — регионы страны!', 148.5, 145, { align: 'center' });
+
+    // Contact Slide
+    pdf.addPage();
+    pdf.setFillColor(26, 35, 50);
+    pdf.rect(0, 0, 297, 210, 'F');
+    pdf.setTextColor(255, 255, 255);
+    pdf.setFontSize(36);
+    pdf.text('Готовы начать?', 148.5, 40, { align: 'center' });
+    pdf.setFontSize(18);
+    pdf.text('Свяжитесь с нами для бесплатной консультации', 148.5, 60, { align: 'center' });
+    
+    pdf.setFontSize(26);
+    pdf.text('Софья Казакова', 148.5, 95, { align: 'center' });
+    pdf.setTextColor(255, 200, 0);
+    pdf.setFontSize(16);
+    pdf.text('Руководитель проектов', 148.5, 110, { align: 'center' });
+    
+    pdf.setTextColor(255, 255, 255);
+    pdf.setFontSize(13);
+    pdf.text('s.kazakova@centre.digital', 148.5, 135, { align: 'center' });
+    pdf.text('@sofiakz', 148.5, 150, { align: 'center' });
+    pdf.text('+7 905 768 22 05', 148.5, 165, { align: 'center' });
+    
+    pdf.setFontSize(12);
+    pdf.setTextColor(203, 213, 225);
+    pdf.text('Centre digital & media — ваш путь к успеху в России', 148.5, 190, { align: 'center' });
+
+    pdf.save('Centre_Digital_Media_Presentation_v2.pdf');
   };
 
   const exportToPPTX = () => {
@@ -627,21 +707,31 @@ export default function Presentation2() {
 
       {/* Main Content */}
       <div className="ml-16 min-h-screen relative z-20">
-        {/* Export Button */}
-        <Button
-          onClick={exportToPPTX}
-          variant="secondary"
-          className="fixed top-6 right-6 z-50 shadow-xl"
-        >
-          <Icon name="Download" size={20} />
-          Скачать PPTX
-        </Button>
+        {/* Export Buttons */}
+        <div className="fixed top-6 right-6 z-50 flex gap-3">
+          <Button
+            onClick={exportToPDF}
+            variant="secondary"
+            className="shadow-xl"
+          >
+            <Icon name="FileDown" size={20} />
+            PDF
+          </Button>
+          <Button
+            onClick={exportToPPTX}
+            variant="secondary"
+            className="shadow-xl"
+          >
+            <Icon name="Download" size={20} />
+            PPTX
+          </Button>
+        </div>
 
         {/* Version Switcher */}
         <Link to="/">
           <Button
             variant="outline"
-            className="fixed top-6 right-52 z-50 shadow-xl bg-white"
+            className="fixed top-6 right-64 z-50 shadow-xl bg-white"
           >
             <Icon name="Layers" size={20} />
             Вариант 1
@@ -649,7 +739,7 @@ export default function Presentation2() {
         </Link>
         {/* Slide 0: Cover */}
         {currentSlide === 0 && (
-          <div className="min-h-screen flex items-center justify-center p-12 bg-gradient-to-br from-primary to-primary/90 animate-fade-in">
+          <div data-slide-index="0" className="min-h-screen flex items-center justify-center p-12 bg-gradient-to-br from-primary to-primary/90 animate-fade-in">
             <div className="max-w-4xl text-center text-white">
               <div className="inline-flex items-center gap-2 mb-8 px-6 py-3 bg-white/10 backdrop-blur rounded-xl border border-white/20">
                 <Icon name="Rocket" size={24} className="text-secondary" />
